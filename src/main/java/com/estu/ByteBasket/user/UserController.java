@@ -36,7 +36,7 @@ public class UserController {
         boolean isAdmin = user.getRole().equals(Role.ADMIN);
         model.addAttribute("isAdmin", isAdmin);
         if (isAdmin) {
-            List<Product> products = productService.getProductsBySellerId(username);
+            List<Product> products = productService.getProductsBySellerId(user.getId());
             model.addAttribute("products", products);
         }
         List<CartItem> cartItems = cartRepository.findByUserId(user.getId()).orElse(new Cart()).getItems();

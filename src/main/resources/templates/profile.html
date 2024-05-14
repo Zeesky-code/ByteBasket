@@ -22,6 +22,47 @@
 <main class="main">
     <div class="container">
         <h1>Welcome <span th:text="${username}"></span></h1>
+        <div th:if="${isAdmin}">
+            <div class="header-with-button">
+                <h2>Your Products</h2>
+                <a class="btn" href="/products/create">Add Product</a>
+            </div>
+            <table>
+                <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Description</th>
+                    <th>Price</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="product : ${products}">
+                    <td th:text="${product.name}"></td>
+                    <td th:text="${product.description}"></td>
+                    <td th:text="${product.price}"></td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <h2>Your Cart</h2>
+        <table>
+            <thead>
+            <tr>
+                <th>Product Name</th>
+                <th>Quantity</th>
+                <th>Price</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="cartItem : ${cartItems}">
+                <td th:text="${cartItem.product.name}"></td>
+                <td th:text="${cartItem.quantity}"></td>
+                <td th:text="${cartItem.product.price}"></td>
+                <!-- Add more columns for other cart item details -->
+            </tr>
+            </tbody>
+        </table>
     </div>
 </main>
 </body>

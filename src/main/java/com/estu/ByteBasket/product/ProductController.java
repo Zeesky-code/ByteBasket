@@ -11,6 +11,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.io.IOException;
+import java.math.BigDecimal;
 import java.util.List;
 import java.util.Optional;
 
@@ -41,15 +42,24 @@ public class ProductController {
     public List<Product> getProductsBySellerId(@PathVariable String sellerId) {
         return productService.getProductsBySellerId(sellerId);
     }
+    @GetMapping("/create")
+    public String showCreationForm(Model model) {
+        return "newproduct";
+    }
 
     @PostMapping("/create")
     @PreAuthorize("hasRole('ADMIN')")
-    public Product createProduct( @ModelAttribute Product product,
+    public Product createProduct(@RequestParam("name") String name,
+                                  @RequestParam("description") String description,
+                                  @RequestParam("price") BigDecimal price,
                               Authentication authentication) throws IOException {
+        Product product = new Product();
+        product.setName(name);
+        product.setDescription(description);
+        product.setPrice(price);
         String username = authentication.getName();
         User seller = userRepository.findByUsername(username).orElseThrow();
 
-        //product.setImage(product.getImage().getBytes()); // Convert image to byte array
         product.setSellerId(seller.getId());
         return productService.createProduct(product);
     }

@@ -9,7 +9,6 @@ import org.springframework.web.multipart.MultipartFile;
 import java.math.BigDecimal;
 
 @Data
-@Builder
 @Document(collection = "products")
 public class Product {
     @Id
