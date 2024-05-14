@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Register</title>
+    <link rel="stylesheet" type="text/css" media="all" th:href="@{/css/style.css}">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Poppins&display=swap" rel="stylesheet">
+    <style>
+        .role-button {
+            display: inline-block;
+            padding: 10px 20px;
+            margin: 10px;
+            cursor: pointer;
+            border: 1px solid #ccc;
+        }
+        .active-role {
+            background-color: #007bff;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+<header class="header">
+    <div class="container">
+        <h1><a href="/">Byte Basket</a></h1>
+        <div class="cta">
+            <a href="#" class="btn">Products</a>
+            <a href="#" class="btn">Sign in</a>
+        </div>
+    </div>
+</header>
+
+<main class="main">
+
+    <div class="container">
+        <h2>Register</h2>
+        <div>
+            <div id="user-role" class="role-button active-role" onclick="selectRole('USER')">Buyer</div>
+            <div id="admin-role" class="role-button" onclick="selectRole('ADMIN')">Seller</div>
+        </div>
+        <form th:action="@{/user/register}" method="post" id="signUpForm">
+            <input type="hidden" id="role" name="role" value="USER">
+            <div>
+                <label for="username">Username:</label>
+                <input type="text" id="username" name="username" required>
+            </div>
+            <div>
+                <label for="email">Email:</label>
+                <input type="email" id="email" name="email" required>
+            </div>
+            <div>
+                <label for="password">Password:</label>
+                <input type="password" id="password" name="password" required>
+            </div>
+            <div>
+                <button type="submit">Register</button>
+            </div>
+        </form>
+    </div>
+</main>
+<script>
+    function selectRole(role) {
+        document.getElementById('role').value = role;
+        document.getElementById('user-role').classList.remove('active-role');
+        document.getElementById('admin-role').classList.remove('active-role');
+        if (role === 'BUYER') {
+            document.getElementById('user-role').classList.add('active-role');
+        } else {
+            document.getElementById('admin-role').classList.add('active-role');
+        }
+    }
+    document.getElementById('signUpForm').addEventListener('submit', function(event) {
+    event.preventDefault();
+    const formData = new FormData(this);
+    fetch('/user/register', {
+        method: 'POST',
+        body: formData
+    })
+    .then(response => {
+        if (response.ok) {
+            return response.json(); // Parse JSON response
+        } else {
+            throw new Error('Login failed');
+        }
+    })
+    .then(data => {
+        const token = data.token; // Extract token from JSON response
+        // Attach token to Authorization header for subsequent requests
+        const headers = new Headers();
+        headers.append('Authorization', 'Bearer ' + token);
+        // Construct request object with custom headers
+        const request = new Request('/profile', {
+            method: 'GET',
+            headers: headers
+        });
+        // Fetch profile page with JWT token in headers
+        fetch(request)
+            .then(response => {
+                if (response.ok) {
+                    window.location.href = '/profile'; // Redirect to profile page
+                } else {
+                    throw new Error('Failed to fetch profile');
+                }
+            })
+            .catch(error => {
+                console.error('Failed to fetch profile:', error);
+                // Handle error
+            });
+    })
+    .catch(error => {
+        console.error('Login failed:', error);
+        // Handle login error
+    });
+});
+</script>
+</body>
+</html>
