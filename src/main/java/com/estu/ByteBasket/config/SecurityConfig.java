@@ -29,7 +29,6 @@ public class SecurityConfig {
                 .csrf(csrf-> csrf.disable())
                 .authorizeHttpRequests(auth-> auth.requestMatchers("/user/**","/error")
                 .permitAll()
-                .requestMatchers("/product/create").hasRole("ADMIN")
                 .anyRequest()
                 .authenticated())
                 .authenticationProvider(authenticationProvider)
