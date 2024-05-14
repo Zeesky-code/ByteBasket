@@ -13,6 +13,8 @@ body {
 }
 .header a {
     text-decoration: none;
+}
+.header h1{
     color: #000;
 }
 .container {
@@ -36,6 +38,7 @@ h1 {
 .cta {
     display: flex;
     gap: 10px;
+    color: #fff;
 }
 
 .btn {
