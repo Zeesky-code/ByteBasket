@@ -23,10 +23,9 @@ public class SecurityConfig {
     public SecurityFilterChain defaultFilterChain(HttpSecurity httpSecurity) throws Exception {
         return httpSecurity
                 .csrf(csrf-> csrf.disable())
-                .authorizeHttpRequests(auth-> auth.requestMatchers("/user/**","/error")
-                .permitAll()
-                .anyRequest()
-                .authenticated())
+                .authorizeHttpRequests(
+                        auth-> auth.requestMatchers("/","/user/**","/error","/css/**").permitAll()
+                        .anyRequest().authenticated())
                 .authenticationProvider(authenticationProvider)
                 .addFilterBefore(jwtAuthFilter, UsernamePasswordAuthenticationFilter.class)
                 .httpBasic(Customizer.withDefaults())

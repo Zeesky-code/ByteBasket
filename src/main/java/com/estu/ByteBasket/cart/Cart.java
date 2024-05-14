@@ -9,7 +9,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Data
-@Builder
 @Document(collection = "carts")
 public class Cart {
     @Id

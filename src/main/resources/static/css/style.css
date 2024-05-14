@@ -1,0 +1,123 @@
+body {
+    font-family: "Libre Baskerville", serif;
+    margin: 0;
+    padding: 0;
+    background-color: #fff;
+    min-height: 100%;
+}
+
+.header {
+    background-color: #fff;
+    padding: 20px 0 0px 0;
+    border: grey 1px;
+}
+.header a {
+    text-decoration: none;
+    color: #000;
+}
+.container {
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 0 20px;
+    position: relative;
+}
+
+.header .container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+h1 {
+    font-size: 2em;
+    margin: 0;
+}
+
+.cta {
+    display: flex;
+    gap: 10px;
+}
+
+.btn {
+    background-color: #333;
+    color: #fff;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 20px;
+    text-decoration: none;
+    cursor: pointer;
+    min-width: 50px;
+}
+
+#createTrip{
+    background-color: #2f550c;
+}
+
+.main {
+    padding: 40px 0;
+    text-align: center;
+}
+.homeBackground {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 50%;
+    height: 50%;
+     z-index: -1;
+}
+.hero-text {
+    font-size: 5em;
+    margin-bottom: 10px;
+    font-weight: 700;
+    font-style: normal;
+}
+
+.subtext {
+    font-size: 2em;
+    color: #666;
+}
+
+trip-card {
+    background-color: white;
+    border: 1px solid #2f550c;
+    padding: 8px;
+    border-radius: 12px;
+    width: 30%;
+}
+.trip-card img {
+    border-radius: 12px;
+    width: 30%;
+    height: 50%;
+}
+.tag{
+    padding: 4px 8px;
+    border: 1px solid #2f550c;
+    border-radius: 50px;
+    font-size: 12px;
+    font-weight: 600;
+    color: #788697;
+}
+.name {
+  font-size: 24px;
+  font-weight: 600;
+  margin-top: 16px;
+}
+.trip-card button {
+    border: none;
+    padding: 12px 24px;
+    border-radius: 50px;
+    font-weight: 600;
+    color: #0077ff;
+    background-color: #e0efff;
+    margin: 0 auto;
+    display: block;
+    cursor: pointer;
+}
+.card_details {
+  padding: 16px 8px 8px 8px;
+}
+.featuredTrips{
+    max-width: 300px;
+    margin: 0 auto;
+    margin-top: 20vh;
+}
