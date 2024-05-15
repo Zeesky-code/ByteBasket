@@ -14,6 +14,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Controller
@@ -39,8 +40,13 @@ public class UserController {
             List<Product> products = productService.getProductsBySellerId(user.getId());
             model.addAttribute("products", products);
         }
-        List<CartItem> cartItems = cartRepository.findByUserId(user.getId()).orElse(new Cart()).getItems();
-        model.addAttribute("cartItems", cartItems);
+        List<CartItem> cartItems = cartRepository.findByUserId(username).orElse(new Cart()).getItems();
+        List<Product> productList = new ArrayList<>();
+        for (CartItem item:cartItems) {
+            Product product = productService.getProductById(item.getProductId()).orElseThrow();
+            productList.add(product);
+        }
+        model.addAttribute("cartItems", productList);
         return "profile";
     }
 }

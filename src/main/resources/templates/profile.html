@@ -56,9 +56,9 @@
             </thead>
             <tbody>
             <tr th:each="cartItem : ${cartItems}">
-                <td th:text="${cartItem.product.name}"></td>
-                <td th:text="${cartItem.quantity}"></td>
-                <td th:text="${cartItem.product.price}"></td>
+                <td th:text="${cartItem.name}"></td>
+                <td th:text="${cartItem.description}"></td>
+                <td th:text="${cartItem.price}"></td>
             </tr>
             </tbody>
         </table>
