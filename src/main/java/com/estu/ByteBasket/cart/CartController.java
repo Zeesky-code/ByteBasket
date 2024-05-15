@@ -3,8 +3,9 @@ package com.estu.ByteBasket.cart;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.stereotype.Controller;
 
-@RestController
+@Controller
 @RequestMapping("/cart")
 @RequiredArgsConstructor
 public class CartController {
@@ -18,9 +19,10 @@ public class CartController {
     }
 
     @PostMapping("/add")
-    public Cart addItemToCart(@RequestBody CartItem cartItem, Authentication authentication) {
+    public String addItemToCart(@RequestParam("productId") String productId, Authentication authentication) {
         String userId = authentication.getName();
-        return cartService.addItemToCart(userId, cartItem);
+        cartService.addItemToCart(userId, productId);
+        return "profile";
     }
 
     @PutMapping("/update/{productId}")

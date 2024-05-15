@@ -2,7 +2,7 @@ package com.estu.ByteBasket.cart;
 
 public class CartItem {
     private String productId;
-    private int quantity;
+    private int quantity = 1;
 
     public String getProductId() {
         return productId;

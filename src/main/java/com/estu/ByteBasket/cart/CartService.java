@@ -17,7 +17,9 @@ public class CartService {
         });
     }
 
-    public Cart addItemToCart(String userId, CartItem cartItem) {
+    public Cart addItemToCart(String userId, String productId) {
+        CartItem cartItem = new CartItem();
+        cartItem.setProductId(productId);
         Cart cart = getCartByUserId(userId);
         cart.getItems().add(cartItem);
         return cartRepository.save(cart);
